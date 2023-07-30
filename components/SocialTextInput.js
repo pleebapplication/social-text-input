@@ -52,7 +52,7 @@ const SocialTextInput = forwardRef(({
     }));
 
     return (
-        <View style={style}>
+        <View style={props.style}>
             <SearchResultModal
                 show={searchModalVisibility}
                 onDismissModal={onDismissModal}

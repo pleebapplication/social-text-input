@@ -1,6 +1,6 @@
 import { BottomSheetBackdrop, BottomSheetModal } from '@gorhom/bottom-sheet';
 import { useEffect, useRef, useState } from "react";
-import {Dimensions, FlatList, Platform, StatusBar, TextInput, TouchableHighlight, View} from "react-native";
+import { Dimensions, FlatList, Platform, StatusBar, TextInput, TouchableHighlight, View } from "react-native";
 import { initialWindowMetrics } from 'react-native-safe-area-context';
 
 const MODAL_HEIGHT = Dimensions.get('screen').height - (Platform.OS === 'ios' ? StatusBar.currentHeight : 0);
