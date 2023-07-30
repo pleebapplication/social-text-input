@@ -4,7 +4,7 @@ import {TextInput, View} from "react-native";
 import {forwardRef, useImperativeHandle, useRef, useState} from "react";
 
 const SocialTextInput = forwardRef(({
-    showSearchModal, ...props
+    showSearchModal, highlights, ...props
 }, ref) => {
     const [searchModalVisibility, setSearchModalVisibility] = useState(false);
     const [text, setText] = useState('');
@@ -64,7 +64,7 @@ const SocialTextInput = forwardRef(({
                 onSelectionChange={setCurrentPosition}
                 {...props}
             >
-                <SocialText>{text}</SocialText>
+                <SocialText highlights={highlights}>{text}</SocialText>
             </TextInput>
         </View>
     );

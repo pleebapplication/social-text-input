@@ -1,6 +1,6 @@
 {
   "name": "social-text-input",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "React Native component to highlight text based on regex.",
   "main": "index.js",
   "repository": {
