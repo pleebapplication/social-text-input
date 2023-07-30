@@ -1,4 +1,5 @@
-import SocialText from "./components/SocialText";
-import SocialTextInput from "./components/SocialTextInput";
+import * as ST from "./components/SocialText";
+import * as STI from "./components/SocialTextInput";
 
-export default { SocialText, SocialTextInput };
+export const SocialTextInput = STI;
+export const SocialText = ST;
