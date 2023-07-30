@@ -62,7 +62,6 @@ const SocialTextInput = forwardRef(({
                 onChangeText={setCurrentText}
                 ref={textInputRef}
                 onSelectionChange={setCurrentPosition}
-                style={props.style}
                 {...props}
             >
                 <SocialText>{text}</SocialText>
