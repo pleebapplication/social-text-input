@@ -1,4 +1,3 @@
-import { BottomSheetBackdrop, BottomSheetModal } from '@gorhom/bottom-sheet';
 import { useEffect, useRef, useState } from "react";
 import { FlatList, Platform, StatusBar, TextInput, TouchableHighlight, View, Modal } from "react-native";
 import { initialWindowMetrics } from 'react-native-safe-area-context';
