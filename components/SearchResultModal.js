@@ -1,28 +1,14 @@
 import { BottomSheetBackdrop, BottomSheetModal } from '@gorhom/bottom-sheet';
 import { useEffect, useRef, useState } from "react";
-import { Dimensions, FlatList, Platform, StatusBar, TextInput, TouchableHighlight, View } from "react-native";
+import { FlatList, Platform, StatusBar, TextInput, TouchableHighlight, View, Modal } from "react-native";
 import { initialWindowMetrics } from 'react-native-safe-area-context';
-
-const MODAL_HEIGHT = Dimensions.get('screen').height - (Platform.OS === 'ios' ? StatusBar.currentHeight : 0);
-const DEFAULT_MODAL_BACKGROUND_COLOR = '#FFFFFF'
-const DEFAULT_MODAL_INDICATOR_COLOR = '#000000'
 
 export default function SearchResultModal({
   show, onDismiss, onSelect, searchApiMethod, renderSearchResults, style, placeholder, placeholderColor, textInputStyle, pressUnderlayColor, usernameExtractor
 }) {
-    const modalRef = useRef();
     const textRef = useRef();
     const [searchText, setSearchText] = useState('');
     const [searchResults, setSearchResults] = useState([]);
-
-    useEffect(() => {
-        if (show) {
-            setTimeout(() => textRef.current?.focus(), 200);
-            modalRef.current?.present();
-        } else {
-            modalRef.current?.dismiss();
-        }
-    }, [show]);
 
     useEffect(() => {
         if (searchText.length > 0) {
@@ -38,27 +24,19 @@ export default function SearchResultModal({
         onDismiss();
     };
 
-    const bottomSheetDrop = (props) => {
-        return <BottomSheetBackdrop
-            {...props}
-            disappearsOnIndex={-1}
-            appearsOnIndex={0}
-        />
-    }
-
     return (
-        <BottomSheetModal
-            ref={modalRef}
-            backgroundStyle={{ backgroundColor: style.backgroundColor || DEFAULT_MODAL_BACKGROUND_COLOR }}
-            handleIndicatorStyle={{ backgroundColor: style.indicatorColor || DEFAULT_MODAL_INDICATOR_COLOR }}
-            snapPoints={[MODAL_HEIGHT]}
+        <Modal
             onDismiss={onDismissModal}
-            enablePanDownToClose
-            backdropComponent={bottomSheetDrop}
+            onRequestClose={onDismissModal}
+            style={{ backgroundColor: 'transparent' }}
+            visible={show}
+            animationType={'slide'}
         >
             <View style={{
+                ...style,
                 flex: 1,
                 alignItems: 'center',
+                paddingTop: Platform.OS === 'ios' ? StatusBar.currentHeight : 0,
                 paddingBottom: initialWindowMetrics.insets.bottom,
             }}
             >
@@ -96,6 +74,6 @@ export default function SearchResultModal({
                     />
                 </View>
             </View>
-        </BottomSheetModal>
+        </Modal>
     );
 }

@@ -43,6 +43,7 @@ const SocialTextInput = forwardRef(({
         const startsWithAt = username.startsWith('@');
         const newText = `${textRef.current?.substring(0, positionRef.current - (startsWithAt ? 1 : 0))}${username} ${textRef.current?.substring(positionRef.current, textRef.current?.length)}`;
         setCurrentText(newText);
+        onDismissModal();
 
     };
     useImperativeHandle(ref, () => ({
