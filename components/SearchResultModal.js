@@ -10,7 +10,7 @@ export default function SearchResultModal({
     const [searchResults, setSearchResults] = useState([]);
 
     useEffect(() => {
-        if (searchText.length > 0) {
+        if (searchText.length > 0 && searchApiMethod) {
             return searchApiMethod(searchText)
                 .then((searchResultArray) => setSearchResults(searchResultArray))
                 .catch(console.error);
@@ -32,11 +32,12 @@ export default function SearchResultModal({
             animationType={'slide'}
         >
             <View style={{
-                ...style,
                 flex: 1,
-                alignItems: 'center',
                 paddingTop: Platform.OS === 'ios' ? StatusBar.currentHeight : 0,
+                backgroundColor: 'white',
+
                 paddingBottom: initialWindowMetrics.insets.bottom,
+                ...style,
             }}
             >
                 <View style={{
@@ -50,13 +51,13 @@ export default function SearchResultModal({
                     <TextInput
                         ref={textRef}
                         autoComplete="name"
-                        placeholder={placeholder}
-                        placeholderTextColor={placeholderColor}
+                        placeholder={placeholder || 'Search'}
+                        placeholderTextColor={placeholderColor || 'gray'}
                         onChangeText={setSearchText}
                         maxLength={50}
                         blurOnSubmit={false}
                         defaultValue={searchText}
-                        style={{ ...textInputStyle, height: 46 }}
+                        style={{ backgroundColor: '#FFFFFF', ...textInputStyle, width: '92%', padding: 4, height: 46 }}
                     />
                 </View>
                 <View style={{ width: '100%', flex: 1 }}>
@@ -67,7 +68,7 @@ export default function SearchResultModal({
                                 underlayColor={pressUnderlayColor}
                                 onPress={() => onSelect(usernameExtractor(item))}
                             >
-                                {renderSearchResults()}
+                                {renderSearchResults(item)}
                             </TouchableHighlight>
                         )}
                     />
